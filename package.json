@@ -1,0 +1,30 @@
+{
+  "name": "node-playground",
+  "version": "1.0.0",
+  "description": "Basic Node Express app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valentinlup/node-playground.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "playground",
+    "basic",
+    "web"
+  ],
+  "author": "Valentin Lup",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/valentinlup/node-playground/issues"
+  },
+  "homepage": "https://github.com/valentinlup/node-playground#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
