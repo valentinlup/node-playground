@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "author": "Vali",
+    "text": "This is the first message by Vali",
+    "public": false
+  },
+  {
+    "id": 2,
+    "author": "Vali",
+    "text": "I'm loving this messaging stuff",
+    "public": true
+  },
+  {
+    "id": 3,
+    "author": "John Doe",
+    "text": "This is the first message by John Doe",
+    "public": false
+  },
+  {
+    "id": 4,
+    "author": "Vali",
+    "text": "John is here!",
+    "public": true
+  },
+  {
+    "id": 5,
+    "author": "John Doe",
+    "text": "Not too bad!",
+    "public": true
+  }
+]

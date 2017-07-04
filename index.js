@@ -1,37 +1,17 @@
 const express = require('express');
 const helmet = require('helmet');
 const ejs = require('ejs');
+const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
+const PassportHelper = require('./helpers/passportHelper');
 const app = express();
 
 const routes = require('./routes');
-
-const users = [
-  {
-    id: 1,
-    name: 'Vali',
-    username: 'vali',
-    password: 'vali'
-  },
-  {
-    id: 2,
-    name: 'John Doe',
-    username: 'john',
-    password: 'doe'
-  }
-];
-
-const findUser = (username, password, callback) => {
-  const foundUser = users.find(user => {
-    return user.username === username && user.password === password;
-  });
-  return callback(null, foundUser);
-};
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -42,6 +22,7 @@ app.use(helmet({
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   store: new FileStore,
@@ -53,30 +34,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy({},
-  function(username, password, done) {
-    findUser(username, password, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false, { message: 'Unknown user ' + username }); }
-      return done(null, user);
-    })
-  }
-));
+passport.use(new LocalStrategy({}, PassportHelper.strategy));
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
+passport.serializeUser(PassportHelper.serializeUser);
 
-passport.deserializeUser(function(id, done) {
-  const foundUser = users.find(user => {
-    return user.id == id;
-  });
-  if(foundUser) {
-    done(null, foundUser);
-  } else {
-    done(new Error(`User with ID: ${id} doesn't exist`));
-  }
-});
+passport.deserializeUser(PassportHelper.deserializeUser);
 
 app.use('/', routes);
 

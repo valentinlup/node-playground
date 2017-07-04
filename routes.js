@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const Controller = require('./controllers/controller');
 
 const isLoggedIn = (req, res, next) => {
   if(req.isAuthenticated()) {
@@ -10,30 +11,19 @@ const isLoggedIn = (req, res, next) => {
   };
 };
 
-router.get('/', function (req, res) {
-  res.render('welcome');
-});
+router.get('/', Controller.getPublicPage);
 
-router.get('/login', function (req, res) {
-  res.render('login');
-});
+router.get('/login', Controller.getLoginPage);
 
 router.post('/login',
-passport.authenticate('local', { failureRedirect: '/login'}),
-(req, res) => {
-  req.session.save(function () {
-    res.redirect('/private');
-  });
-});
+  passport.authenticate('local', { failureRedirect: '/login'}),
+  Controller.doLogin
+);
 
-router.get('/private', isLoggedIn,
-function (req, res) {
-  res.render('private_welcome');
-});
+router.get('/private', isLoggedIn, Controller.getPrivatePage);
 
-router.get('/logout', isLoggedIn,
-function (req, res) {
-  res.redirect('/');
-});
+router.get('/logout', isLoggedIn, Controller.doLogout);
+
+router.post('/updatePost', isLoggedIn, Controller.updatePost);
 
 module.exports = router;
