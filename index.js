@@ -42,6 +42,6 @@ passport.deserializeUser(PassportHelper.deserializeUser);
 
 app.use('/', routes);
 
-app.listen(3001, function () {
-  console.log('Example app listening on port 3001!');
+app.listen(5555, function () {
+  console.log('Example app listening on port 5555!');
 });
