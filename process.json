@@ -1,13 +1,13 @@
-"apps" : [{
-    "name"        : "worker",
-    "script"      : "./index.js",
-    "watch"       : true,
-    "ignore-watch"       : "sessions",
-    "env": {
-      "NODE_ENV": "development"
-    },
-    "env_production" : {
-       "NODE_ENV": "production"
-    }
+[{
+  "name"        : "app",
+  "script"      : "./index.js",
+  "watch"       : true,
+  "ignore-watch": "sessions",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "env_production" : {
+    "NODE_ENV": "production"
   }
+}
 ]
