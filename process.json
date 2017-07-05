@@ -2,7 +2,7 @@
   "name"        : "app",
   "script"      : "./index.js",
   "watch"       : true,
-  "ignore-watch": "sessions",
+  "ignore_watch": "./sessions",
   "env": {
     "NODE_ENV": "development"
   },
