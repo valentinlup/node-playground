@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   store: new FileStore,
   secret: 'secret',
-  saveUninitialized: true,
+  saveUninitialized: false,
   resave: true
 }));
 

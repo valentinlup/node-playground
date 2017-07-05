@@ -20,7 +20,11 @@ Controller.getPrivatePage = (req, res) => {
 }
 
 Controller.doLogout = (req, res) => {
-  res.redirect('/');
+  req.logOut();
+  req.session.destroy(function (err) {
+    res.redirect('/');
+  });
+
 }
 
 Controller.updatePost = (req, res) => {
